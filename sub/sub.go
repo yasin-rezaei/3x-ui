@@ -229,6 +229,12 @@ func (s *Server) initRouter() (*gin.Engine, error) {
 
 	g := engine.Group("/")
 
+    // اضافه شده برای نمایش کانال تلگرام
+	g.Use(func(c *gin.Context) {
+		c.Header("support-url", "https://t.me/yamo_net")
+		c.Next()
+	})
+    // ادامه کدها...
 	s.sub = NewSUBController(
 		g, LinksPath, JsonPath, subJsonEnable, Encrypt, ShowInfo, RemarkModel, SubUpdates,
 		SubJsonFragment, SubJsonNoises, SubJsonMux, SubJsonRules, SubTitle)
